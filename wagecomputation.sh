@@ -5,7 +5,7 @@ echo "Attendance"
 
 	random=$(( $RANDOM % 2 ))
 
-	if [ $R1 -eq 0 ]
+	if [ $random -eq 0 ]
 	then
 		echo "Absent"
 	else
