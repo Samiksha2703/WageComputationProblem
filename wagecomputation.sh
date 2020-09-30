@@ -2,41 +2,44 @@
 echo "Welcome to Employee Wage Computation Program"
 
 NUM_OF_WORKING_DAYS=20
+MAX_HRS_IN_MONTH=100
 WAGE_PER_HR=20
 FULL_DAY_HRS=8
 PART_TIME_HRS=4
 
-daily_Wage=0
 monthly_Wage=0
+totalEmpHrs=0
+totalWorkingDays=0
 
-for i in `seq $NUM_OF_WORKING_DAYS`
+echo "Calculating monthly wages with condition days!>20 or hrs!>100" 
+
+while [[ $totalEmpHrs -ne $MAX_HRS_IN_MONTH && $totalWorkingDays -ne $NUM_OF_WORKING_DAYS ]]
 do
-	random=$(( $RANDOM % 3 ))
+        ((totalWorkingDays++))
+        random=$(( $RANDOM % 3 ))
 
 
-	case $random in
+        case $random in
 
-	1)
-        echo "Present - FullDay"
-        daily_Wage=$(( $WAGE_PER_HR * $FULL_DAY_HRS ))
-        ;;
-
+        1)
+                #Present fullday
+                empHrs=$FULL_DAY_HRS
+                ;;
         2)
-        echo "Present - HalfDay"
-        daily_Wage=$(( $WAGE_PER_HR * $PART_TIME_HRS ))
-        ;;
-
+                #Present halfday
+                empHrs=$PART_TIME_HRS
+                ;;
         *)
-        echo "Absent"
-	daily_Wage=0
-        ;;
+                #absent
+                empHrs=0
+                ;;
+        esac
 
-	esac
-
-	monthly_Wage=$(( $monthly_Wage + $daily_Wage ))
+        totalEmpHrs=$(( $totalEmpHrs + $empHrs ))
 done
 
+echo $totalEmpHrs
+
+monthly_Wage=$(( $totalEmpHrs * $WAGE_PER_HR ))
+
 echo "Monthly Wage : $monthly_Wage"
-
-
-
