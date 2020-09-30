@@ -1,14 +1,22 @@
 #!/bin/bash/
 echo "Welcome to Employee Wage Computation Program"
 
-echo "Attendance"
+WAGE_PER_HR=20
+FULL_DAY_HRS=8
 
-	random=$(( $RANDOM % 2 ))
+daily_Wage=0
 
-	if [ $random -eq 0 ]
-	then
-		echo "Absent"
-	else
-		echo "Present"
-	fi
+        random=$(( $RANDOM % 2 ))
+
+
+        if [ $random -eq 1 ]
+        then
+                echo "Present"
+
+                daily_Wage=$(( $WAGE_PER_HR * $FULL_DAY_HRS ))
+                echo "Daily Wage : $daily_Wage"
+        else
+                echo "Absent"
+                echo "Daily Wage : 0"
+        fi
 
