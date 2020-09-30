@@ -1,18 +1,7 @@
 #!/bin/bash/
 echo "Welcome to Employee Wage Computation Program"
 
-NUM_OF_WORKING_DAYS=20
-MAX_HRS_IN_MONTH=100
-WAGE_PER_HR=20
-FULL_DAY_HRS=8
-PART_TIME_HRS=4
-
-monthly_Wage=0
-totalEmpHrs=0
-totalWorkingDays=0
-
-echo "Calculating monthly wages with condition days!>20 or hrs!>100" 
-
+TotalWorkingHrs() {
 while [[ $totalEmpHrs -ne $MAX_HRS_IN_MONTH && $totalWorkingDays -ne $NUM_OF_WORKING_DAYS ]]
 do
         ((totalWorkingDays++))
@@ -20,14 +9,13 @@ do
 
 
         case $random in
-
         1)
                 #Present fullday
-                empHrs=$FULL_DAY_HRS
+                empHrs=8
                 ;;
         2)
                 #Present halfday
-                empHrs=$PART_TIME_HRS
+                empHrs=4
                 ;;
         *)
                 #absent
@@ -37,9 +25,21 @@ do
 
         totalEmpHrs=$(( $totalEmpHrs + $empHrs ))
 done
+}
 
-echo $totalEmpHrs
 
-monthly_Wage=$(( $totalEmpHrs * $WAGE_PER_HR ))
+NUM_OF_WORKING_DAYS=20
+MAX_HRS_IN_MONTH=100
+WAGE_PER_HR=20
+FULL_DAY_HRS=8
+PART_TIME_HRS=4
+monthly_Wage=0
 
-echo "Monthly Wage : $monthly_Wage"
+totalEmpHrs=0
+totalWorkingDays=0
+
+echo "Calculate work hours for one month"
+
+TotalWorkingHrs
+
+echo "Total working hours for a month $totalEmpHrs"
